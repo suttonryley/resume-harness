@@ -164,7 +164,8 @@ gitignored. Job postings are fetched with a headless browser on your machine. Th
 your resume text and (for the builder only) your work history are sent to Claude through
 Claude Code, like any other file it reads.
 
-## Fonts
+## License
 
-The template bundles Source Sans 3 and Source Serif 4, licensed under the SIL Open Font
-License (`harness/templates/fonts/OFL-LICENSE.md`).
+[MIT](LICENSE). The template's bundled fonts, Source Sans 3 and Source Serif 4, are
+licensed separately under the SIL Open Font License
+(`harness/templates/fonts/OFL-LICENSE.md`).
