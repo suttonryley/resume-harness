@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "source": {
+    "url": "https://jobs.example.com/harborline/senior-backend-engineer",
+    "fetched_at": "2026-11-12T15:04:00Z",
+    "raw_text_sha256": "3b1f0c9a6e2d4f8b7a5c1e0d9f8b7a6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1f00"
+  },
+  "role": {
+    "title": "Senior Backend Engineer, Platform",
+    "normalized_title": "backend engineer",
+    "seniority": "senior",
+    "department": "Platform Engineering",
+    "employment_type": "full_time",
+    "location": {"cities": ["Denver, CO"], "remote": "hybrid", "notes": "Two days a week in office"},
+    "compensation": {"min": 150000, "max": 185000, "currency": "USD", "period": "year"}
+  },
+  "company": {
+    "name": "Harborline Analytics",
+    "industry": "Logistics software",
+    "stage_or_size": "Series C, ~400 employees",
+    "mission_summary": "Real-time visibility for freight networks.",
+    "values": ["Ownership", "Clarity over cleverness"]
+  },
+  "requirements": [
+    {
+      "id": "req_01",
+      "text": "5+ years building backend services in production",
+      "type": "required",
+      "category": "experience",
+      "normalized_terms": ["backend", "backend services", "server-side"],
+      "years_min": 5,
+      "weight": 1.0
+    },
+    {
+      "id": "req_02",
+      "text": "Strong experience with AWS (Lambda, DynamoDB, SQS)",
+      "type": "required",
+      "category": "hard_skill",
+      "normalized_terms": ["AWS", "Amazon Web Services", "Lambda", "DynamoDB", "SQS"],
+      "years_min": null,
+      "weight": 0.9
+    },
+    {
+      "id": "req_03",
+      "text": "Experience with infrastructure as code (Terraform or CDK)",
+      "type": "required",
+      "category": "tool",
+      "normalized_terms": ["terraform", "aws cdk", "cdk", "infrastructure as code", "iac"],
+      "years_min": null,
+      "weight": 0.7
+    },
+    {
+      "id": "req_04",
+      "text": "Experience with PostgreSQL or another relational database",
+      "type": "preferred",
+      "category": "hard_skill",
+      "normalized_terms": ["postgresql", "postgres", "sql", "relational database"],
+      "years_min": null,
+      "weight": 0.4
+    },
+    {
+      "id": "req_05",
+      "text": "Active Secret clearance or ability to obtain one",
+      "type": "preferred",
+      "category": "clearance",
+      "normalized_terms": ["secret clearance", "security clearance"],
+      "years_min": null,
+      "weight": 0.3
+    }
+  ],
+  "responsibilities": [
+    {"id": "resp_01", "text": "Design and run event-driven services that ingest carrier telemetry",
+     "related_requirement_ids": ["req_01", "req_02"]},
+    {"id": "resp_02", "text": "Own deployment pipelines and infrastructure for your services",
+     "related_requirement_ids": ["req_03"]}
+  ],
+  "keywords": [
+    {"term": "AWS", "count": 4, "synonyms": ["Amazon Web Services"]},
+    {"term": "event-driven", "count": 2, "synonyms": []},
+    {"term": "Terraform", "count": 2, "synonyms": []}
+  ],
+  "requests_clearance": true,
+  "parse_notes": ["Clearance listed under 'nice to have'; treated as preferred."]
+}

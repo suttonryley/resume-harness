@@ -1,0 +1,142 @@
+{
+  "$defs": {
+    "ItemResult": {
+      "additionalProperties": false,
+      "properties": {
+        "item": {
+          "description": "The item's name, exactly as job.json lists it",
+          "title": "Item",
+          "type": "string"
+        },
+        "resume_evidence": {
+          "description": "Literal substrings of the resume text that support the status. Required for met and partial; must be empty for missing",
+          "items": {
+            "type": "string"
+          },
+          "title": "Resume Evidence",
+          "type": "array"
+        },
+        "status": {
+          "enum": [
+            "met",
+            "partial",
+            "missing"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "item",
+        "status"
+      ],
+      "title": "ItemResult",
+      "type": "object"
+    },
+    "RequirementResult": {
+      "additionalProperties": false,
+      "properties": {
+        "req_id": {
+          "title": "Req Id",
+          "type": "string"
+        },
+        "rationale": {
+          "description": "One or two sentences, written first: what the text shows and what it lacks",
+          "title": "Rationale",
+          "type": "string"
+        },
+        "item_results": {
+          "description": "Only for requirements with items: one result per item. Then resume_evidence and status are left out",
+          "items": {
+            "$ref": "#/$defs/ItemResult"
+          },
+          "title": "Item Results",
+          "type": "array"
+        },
+        "resume_evidence": {
+          "description": "Literal substrings of the resume text that support the status. Required for met and partial; must be empty for missing. Unused when the requirement has items",
+          "items": {
+            "type": "string"
+          },
+          "title": "Resume Evidence",
+          "type": "array"
+        },
+        "status": {
+          "anyOf": [
+            {
+              "enum": [
+                "met",
+                "partial",
+                "missing"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Required unless the requirement has items",
+          "title": "Status"
+        }
+      },
+      "required": [
+        "req_id",
+        "rationale"
+      ],
+      "title": "RequirementResult",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "resume_version": {
+      "description": "v0, v1, v2 ...",
+      "pattern": "^v\\d+$",
+      "title": "Resume Version",
+      "type": "string"
+    },
+    "job_sha": {
+      "description": "job.json source.raw_text_sha256",
+      "title": "Job Sha",
+      "type": "string"
+    },
+    "requirement_results": {
+      "items": {
+        "$ref": "#/$defs/RequirementResult"
+      },
+      "title": "Requirement Results",
+      "type": "array"
+    },
+    "seniority_fit": {
+      "description": "How the resume's level compares with the role's seniority",
+      "enum": [
+        "below",
+        "match",
+        "above"
+      ],
+      "title": "Seniority Fit",
+      "type": "string"
+    },
+    "notes": {
+      "default": "",
+      "description": "Anything a reader should know; not used in scoring",
+      "title": "Notes",
+      "type": "string"
+    }
+  },
+  "required": [
+    "resume_version",
+    "job_sha",
+    "requirement_results",
+    "seniority_fit"
+  ],
+  "title": "GradeReport",
+  "type": "object"
+}

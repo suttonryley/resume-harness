@@ -1,0 +1,698 @@
+{
+  "schema_version": "1.0",
+  "profile": {
+    "name": "Jordan Rivera",
+    "headlines": [
+      "Senior Backend Engineer",
+      "Platform Engineer"
+    ],
+    "contact": {
+      "email": "jordan.rivera@example.com",
+      "phone": "(555) 010-4477",
+      "location": "Los Angeles, CA",
+      "links": [
+        {
+          "label": "LinkedIn",
+          "url": "https://www.linkedin.com/in/jordan-rivera-example"
+        },
+        {
+          "label": "GitHub",
+          "url": "https://github.com/jrivera-example"
+        }
+      ]
+    },
+    "summaries": [
+      {
+        "id": "sum_backend",
+        "angle": "backend",
+        "text": "Backend engineer with 8 years building payment and logistics systems in Python and Go. Led the migration of a monolith to event-driven services handling 40M events a day, and cut infrastructure spend by 31% through capacity work on Kubernetes."
+      },
+      {
+        "id": "sum_platform",
+        "angle": "platform / infrastructure",
+        "text": "Platform-minded engineer who makes services cheaper and easier to operate: Kubernetes capacity work, contract testing across 14 services, and observability that cut incident triage time by two thirds."
+      }
+    ]
+  },
+  "roles": [
+    {
+      "id": "role_northwind",
+      "company": "Northwind Logistics",
+      "company_aliases": [
+        "Northwind"
+      ],
+      "title": "Senior Software Engineer",
+      "alt_titles": [],
+      "employment_type": "full_time",
+      "location": "Los Angeles, CA",
+      "start": "2022-03",
+      "end": "present",
+      "context": "Shipment tracking platform for mid-size carriers. Team of 9. Go and Python services on AWS EKS, Kafka, PostgreSQL.",
+      "achievements": [
+        {
+          "id": "ach_nw_01",
+          "summary": "Led a team of 5 migrating shipment tracking from a Django monolith to Go services on Kafka, raising throughput to 40M events/day with p99 latency under 120 ms.",
+          "details": "The monolith hit its ceiling during peak season. Proposed a strangler migration, split ingestion, enrichment and notification into Go services on Kafka, and ran both paths in parallel for six weeks before cutover.",
+          "metrics": [
+            {
+              "value": "5",
+              "description": "engineers led",
+              "approximate": false,
+              "shareable": true
+            },
+            {
+              "value": "40M",
+              "description": "events per day after migration",
+              "approximate": false,
+              "shareable": true
+            },
+            {
+              "value": "120 ms",
+              "description": "p99 latency",
+              "approximate": false,
+              "shareable": true
+            }
+          ],
+          "skills": [
+            "sk_go",
+            "sk_python",
+            "sk_kafka",
+            "sk_django",
+            "sk_microservices",
+            "sk_event_driven"
+          ],
+          "tags": [
+            "leadership",
+            "migration",
+            "architecture"
+          ],
+          "strength": null,
+          "private_terms": [],
+          "no_metrics": false,
+          "status": "complete"
+        },
+        {
+          "id": "ach_nw_02",
+          "summary": "Cut monthly AWS spend by 31% ($84K/year) by right-sizing EKS node pools and moving batch jobs to spot instances.",
+          "details": "Profiled node utilization, consolidated node pools, and moved interruptible batch work to spot instances with checkpointing.",
+          "metrics": [
+            {
+              "value": "31%",
+              "description": "reduction in monthly AWS spend",
+              "approximate": false,
+              "shareable": true
+            },
+            {
+              "value": "$84K",
+              "description": "annual savings",
+              "approximate": false,
+              "shareable": true
+            }
+          ],
+          "skills": [
+            "sk_aws",
+            "sk_kubernetes",
+            "sk_terraform"
+          ],
+          "tags": [
+            "cost",
+            "infrastructure"
+          ],
+          "strength": null,
+          "private_terms": [],
+          "no_metrics": false,
+          "status": "complete"
+        },
+        {
+          "id": "ach_nw_03",
+          "summary": "Designed an idempotent webhook delivery system with retry queues, reducing customer-reported missed notifications from about 200 a week to under 5.",
+          "details": "Webhooks were fire-and-forget. Added idempotency keys, exponential backoff on SQS retry queues and a dead-letter dashboard for support.",
+          "metrics": [
+            {
+              "value": "200",
+              "description": "missed notifications per week before",
+              "approximate": true,
+              "shareable": true
+            },
+            {
+              "value": "5",
+              "description": "missed notifications per week after",
+              "approximate": false,
+              "shareable": true
+            }
+          ],
+          "skills": [
+            "sk_go",
+            "sk_aws",
+            "sk_postgresql"
+          ],
+          "tags": [
+            "reliability",
+            "api"
+          ],
+          "strength": null,
+          "private_terms": [],
+          "no_metrics": false,
+          "status": "complete"
+        },
+        {
+          "id": "ach_nw_04",
+          "summary": "Introduced contract testing with Pact across 14 services, catching 22 breaking API changes before release in one quarter.",
+          "details": "Wrote the shared CI step and the onboarding guide, then paired with each team to add their first contract.",
+          "metrics": [
+            {
+              "value": "14",
+              "description": "services covered",
+              "approximate": false,
+              "shareable": true
+            },
+            {
+              "value": "22",
+              "description": "breaking changes caught in one quarter",
+              "approximate": false,
+              "shareable": true
+            }
+          ],
+          "skills": [
+            "sk_contract_testing"
+          ],
+          "tags": [
+            "testing",
+            "quality"
+          ],
+          "strength": null,
+          "private_terms": [],
+          "no_metrics": false,
+          "status": "complete"
+        },
+        {
+          "id": "ach_nw_05",
+          "summary": "Leading the design of a multi-region failover for the tracking API.",
+          "details": "In design review. Active-passive with PostgreSQL logical replication is the current proposal; nothing is in production yet. Its internal codename is listed in private_terms to show that the builder must never print it.",
+          "metrics": [],
+          "skills": [
+            "sk_postgresql",
+            "sk_aws"
+          ],
+          "tags": [
+            "reliability",
+            "architecture"
+          ],
+          "strength": null,
+          "private_terms": [
+            "Project Lighthouse"
+          ],
+          "no_metrics": true,
+          "status": "in_progress"
+        }
+      ]
+    },
+    {
+      "id": "role_fairpay",
+      "company": "FairPay",
+      "company_aliases": [],
+      "title": "Software Engineer II",
+      "alt_titles": [],
+      "employment_type": "full_time",
+      "location": "San Francisco, CA",
+      "start": "2019-01",
+      "end": "2022-02",
+      "context": "Card-issuing fintech. Payments platform team of 6. Python, PostgreSQL, Celery.",
+      "achievements": [
+        {
+          "id": "ach_fp_01",
+          "summary": "Built the ledger reconciliation service in Python and PostgreSQL that matched $2.1B in annual card transactions against bank settlement files.",
+          "details": "Replaced a spreadsheet process run by finance. Parses three bank settlement formats and flags mismatches for review.",
+          "metrics": [
+            {
+              "value": "$2.1B",
+              "description": "annual card volume reconciled",
+              "approximate": false,
+              "shareable": true
+            }
+          ],
+          "skills": [
+            "sk_python",
+            "sk_postgresql"
+          ],
+          "tags": [
+            "payments",
+            "data"
+          ],
+          "strength": null,
+          "private_terms": [],
+          "no_metrics": false,
+          "status": "complete"
+        },
+        {
+          "id": "ach_fp_02",
+          "summary": "Cut reconciliation runtime from 6 hours to 35 minutes by partitioning tables and parallelizing with Celery.",
+          "details": null,
+          "metrics": [
+            {
+              "value": "6 hours",
+              "description": "runtime before",
+              "approximate": false,
+              "shareable": true
+            },
+            {
+              "value": "35 minutes",
+              "description": "runtime after",
+              "approximate": false,
+              "shareable": true
+            }
+          ],
+          "skills": [
+            "sk_postgresql",
+            "sk_celery",
+            "sk_python"
+          ],
+          "tags": [
+            "performance"
+          ],
+          "strength": null,
+          "private_terms": [],
+          "no_metrics": false,
+          "status": "complete"
+        },
+        {
+          "id": "ach_fp_03",
+          "summary": "Owned PCI DSS evidence collection for the payments platform across two annual audits with zero findings.",
+          "details": "Automated evidence export from AWS Config. The audit fee is a non-shareable metric, to show that the builder never prints those.",
+          "metrics": [
+            {
+              "value": "2",
+              "description": "audits",
+              "approximate": false,
+              "shareable": true
+            },
+            {
+              "value": "0",
+              "description": "findings",
+              "approximate": false,
+              "shareable": true
+            },
+            {
+              "value": "$40K",
+              "description": "audit fee",
+              "approximate": false,
+              "shareable": false
+            }
+          ],
+          "skills": [
+            "sk_pci"
+          ],
+          "tags": [
+            "compliance",
+            "payments"
+          ],
+          "strength": null,
+          "private_terms": [],
+          "no_metrics": false,
+          "status": "complete"
+        }
+      ]
+    },
+    {
+      "id": "role_cartwheel",
+      "company": "Cartwheel Commerce",
+      "company_aliases": [],
+      "title": "Software Engineer",
+      "alt_titles": [],
+      "employment_type": "full_time",
+      "location": "Austin, TX",
+      "start": "2017-06",
+      "end": "2018-12",
+      "context": "E-commerce SaaS for small merchants. Python and Redis.",
+      "achievements": [
+        {
+          "id": "ach_cw_01",
+          "summary": "Shipped inventory sync between Shopify and three warehouse systems, used by 1,200 merchants.",
+          "details": null,
+          "metrics": [
+            {
+              "value": "3",
+              "description": "warehouse systems",
+              "approximate": false,
+              "shareable": true
+            },
+            {
+              "value": "1,200",
+              "description": "merchants",
+              "approximate": false,
+              "shareable": true
+            }
+          ],
+          "skills": [
+            "sk_python",
+            "sk_redis"
+          ],
+          "tags": [
+            "integrations"
+          ],
+          "strength": null,
+          "private_terms": [],
+          "no_metrics": false,
+          "status": "complete"
+        },
+        {
+          "id": "ach_cw_02",
+          "summary": "Added structured logging and Datadog dashboards that cut median incident triage time from 50 to 15 minutes.",
+          "details": null,
+          "metrics": [
+            {
+              "value": "50",
+              "description": "minutes median triage before",
+              "approximate": false,
+              "shareable": true
+            },
+            {
+              "value": "15",
+              "description": "minutes median triage after",
+              "approximate": false,
+              "shareable": true
+            }
+          ],
+          "skills": [
+            "sk_datadog"
+          ],
+          "tags": [
+            "observability"
+          ],
+          "strength": null,
+          "private_terms": [],
+          "no_metrics": false,
+          "status": "complete"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj_pgqueue",
+      "name": "pgqueue",
+      "kind": "open_source",
+      "url": "https://github.com/jrivera-example/pgqueue",
+      "start": "2023-01",
+      "end": "present",
+      "context": "Postgres-backed job queue for Go.",
+      "achievements": [
+        {
+          "id": "ach_pgq_01",
+          "summary": "Open-source Postgres-backed job queue for Go using SKIP LOCKED; 900 GitHub stars and used in production by several startups.",
+          "details": null,
+          "metrics": [
+            {
+              "value": "900",
+              "description": "GitHub stars",
+              "approximate": true,
+              "shareable": true
+            }
+          ],
+          "skills": [
+            "sk_go",
+            "sk_postgresql"
+          ],
+          "tags": [
+            "open_source"
+          ],
+          "strength": null,
+          "private_terms": [],
+          "no_metrics": false,
+          "status": "complete"
+        }
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "id": "sk_go",
+      "name": "Go",
+      "aliases": [
+        "Golang"
+      ],
+      "category": "language",
+      "proficiency": null,
+      "years": 4.8,
+      "last_used": "present",
+      "years_basis": "derived",
+      "evidence_ids": [
+        "ach_nw_01",
+        "ach_nw_03",
+        "ach_pgq_01"
+      ]
+    },
+    {
+      "id": "sk_python",
+      "name": "Python",
+      "aliases": [],
+      "category": "language",
+      "proficiency": null,
+      "years": 9.5,
+      "last_used": "present",
+      "years_basis": "derived",
+      "evidence_ids": [
+        "ach_cw_01",
+        "ach_fp_01",
+        "ach_fp_02",
+        "ach_nw_01"
+      ]
+    },
+    {
+      "id": "sk_django",
+      "name": "Django",
+      "aliases": [],
+      "category": "framework",
+      "proficiency": null,
+      "years": 4.8,
+      "last_used": "present",
+      "years_basis": "derived",
+      "evidence_ids": [
+        "ach_nw_01"
+      ]
+    },
+    {
+      "id": "sk_celery",
+      "name": "Celery",
+      "aliases": [],
+      "category": "library",
+      "proficiency": null,
+      "years": 3.2,
+      "last_used": "2022",
+      "years_basis": "derived",
+      "evidence_ids": [
+        "ach_fp_02"
+      ]
+    },
+    {
+      "id": "sk_postgresql",
+      "name": "PostgreSQL",
+      "aliases": [
+        "Postgres"
+      ],
+      "category": "database",
+      "proficiency": null,
+      "years": 7.9,
+      "last_used": "present",
+      "years_basis": "derived",
+      "evidence_ids": [
+        "ach_fp_01",
+        "ach_fp_02",
+        "ach_nw_03",
+        "ach_nw_05",
+        "ach_pgq_01"
+      ]
+    },
+    {
+      "id": "sk_redis",
+      "name": "Redis",
+      "aliases": [],
+      "category": "database",
+      "proficiency": null,
+      "years": 1.6,
+      "last_used": "2018",
+      "years_basis": "derived",
+      "evidence_ids": [
+        "ach_cw_01"
+      ]
+    },
+    {
+      "id": "sk_kafka",
+      "name": "Kafka",
+      "aliases": [
+        "Apache Kafka"
+      ],
+      "category": "tool",
+      "proficiency": null,
+      "years": 4.8,
+      "last_used": "present",
+      "years_basis": "derived",
+      "evidence_ids": [
+        "ach_nw_01"
+      ]
+    },
+    {
+      "id": "sk_aws",
+      "name": "AWS",
+      "aliases": [
+        "Amazon Web Services",
+        "EKS",
+        "SQS",
+        "RDS"
+      ],
+      "category": "cloud",
+      "proficiency": null,
+      "years": 4.8,
+      "last_used": "present",
+      "years_basis": "derived",
+      "evidence_ids": [
+        "ach_nw_02",
+        "ach_nw_03",
+        "ach_nw_05"
+      ]
+    },
+    {
+      "id": "sk_kubernetes",
+      "name": "Kubernetes",
+      "aliases": [
+        "k8s"
+      ],
+      "category": "platform",
+      "proficiency": null,
+      "years": 4.8,
+      "last_used": "present",
+      "years_basis": "derived",
+      "evidence_ids": [
+        "ach_nw_02"
+      ]
+    },
+    {
+      "id": "sk_terraform",
+      "name": "Terraform",
+      "aliases": [],
+      "category": "tool",
+      "proficiency": null,
+      "years": 4.8,
+      "last_used": "present",
+      "years_basis": "derived",
+      "evidence_ids": [
+        "ach_nw_02"
+      ]
+    },
+    {
+      "id": "sk_datadog",
+      "name": "Datadog",
+      "aliases": [],
+      "category": "tool",
+      "proficiency": null,
+      "years": 1.6,
+      "last_used": "2018",
+      "years_basis": "derived",
+      "evidence_ids": [
+        "ach_cw_02"
+      ]
+    },
+    {
+      "id": "sk_microservices",
+      "name": "Microservices",
+      "aliases": [],
+      "category": "practice",
+      "proficiency": null,
+      "years": 4.8,
+      "last_used": "present",
+      "years_basis": "derived",
+      "evidence_ids": [
+        "ach_nw_01"
+      ]
+    },
+    {
+      "id": "sk_event_driven",
+      "name": "Event-driven architecture",
+      "aliases": [],
+      "category": "practice",
+      "proficiency": null,
+      "years": 4.8,
+      "last_used": "present",
+      "years_basis": "derived",
+      "evidence_ids": [
+        "ach_nw_01"
+      ]
+    },
+    {
+      "id": "sk_contract_testing",
+      "name": "Contract testing",
+      "aliases": [
+        "Pact"
+      ],
+      "category": "practice",
+      "proficiency": null,
+      "years": 4.8,
+      "last_used": "present",
+      "years_basis": "derived",
+      "evidence_ids": [
+        "ach_nw_04"
+      ]
+    },
+    {
+      "id": "sk_pci",
+      "name": "PCI DSS compliance",
+      "aliases": [
+        "PCI"
+      ],
+      "category": "domain",
+      "proficiency": null,
+      "years": 3.2,
+      "last_used": "2022",
+      "years_basis": "derived",
+      "evidence_ids": [
+        "ach_fp_03"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "id": "edu_utexas",
+      "institution": "University of Texas at Austin",
+      "degree": "B.S.",
+      "field": "Computer Science",
+      "start": null,
+      "end": "2017",
+      "details": []
+    }
+  ],
+  "certifications": [
+    {
+      "id": "cert_aws_saa",
+      "name": "AWS Certified Solutions Architect – Associate",
+      "issuer": "Amazon Web Services",
+      "date": "2023-05",
+      "expires": null
+    }
+  ],
+  "clearances": [
+    {
+      "id": "clr_secret",
+      "level": "Secret",
+      "polygraph": null,
+      "status": "inactive",
+      "held_through": "2018-12",
+      "public_wording": "Secret clearance (inactive)",
+      "include_policy": "only_if_job_requests"
+    }
+  ],
+  "constraints": {
+    "never_claim": [
+      "Rust"
+    ],
+    "always_include": [],
+    "max_pages": 2,
+    "preferred_section_order": [
+      "summary",
+      "experience",
+      "projects",
+      "skills",
+      "education",
+      "certifications"
+    ]
+  }
+}

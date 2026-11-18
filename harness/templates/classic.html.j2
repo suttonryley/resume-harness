@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{ r.header.name }} – Resume</title>
+<style>
+@page { size: {{ page_size }}; margin: {{ margin }}; }
+{{ css | safe }}
+</style>
+</head>
+<body>
+<header class="masthead">
+  <h1 class="name">{{ r.header.name }}</h1>
+  {% if r.header.headline %}<p class="headline">{{ r.header.headline }}</p>{% endif %}
+  {% set c = r.header.contact %}
+  <p class="contact">
+    {%- set parts = [] -%}
+    {%- if c.location %}{% set _ = parts.append(c.location) %}{% endif -%}
+    {%- if c.phone %}{% set _ = parts.append(c.phone) %}{% endif -%}
+    {%- set _ = parts.append(c.email) -%}
+    {%- for l in c.links %}{% set _ = parts.append(l.url | bare_url) %}{% endfor -%}
+    {{ parts | join(" | ") }}
+  </p>
+</header>
+
+{% for section in r.section_order %}
+  {% if section == "summary" and r.summary %}
+  <section class="summary">
+    <h2>Summary</h2>
+    <p>{{ r.summary.text }}</p>
+  </section>
+
+  {% elif section == "experience" and r.experience %}
+  <section>
+    <h2>Experience</h2>
+    {% for role in r.experience %}
+    <article class="entry">
+      <div class="row">
+        <h3>{{ role.title }}</h3>
+        <span class="dates">{{ role.start | ym }} – {{ role.end | ym }}</span>
+      </div>
+      <div class="row sub">
+        <span class="org">{{ role.company }}</span>
+        {% if role.location %}<span class="loc">{{ role.location }}</span>{% endif %}
+      </div>
+      {% if role.bullets %}
+      <ul>{% for b in role.bullets %}<li>{{ b.text }}</li>{% endfor %}</ul>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </section>
+
+  {% elif section == "projects" and r.projects %}
+  <section>
+    <h2>Projects</h2>
+    {% for p in r.projects %}
+    <article class="entry">
+      <div class="row">
+        <h3>{{ p.name }}{% if p.url %} <span class="url">{{ p.url | bare_url }}</span>{% endif %}</h3>
+        {% if p.dates %}<span class="dates">{{ p.dates }}</span>{% endif %}
+      </div>
+      {% if p.bullets %}
+      <ul>{% for b in p.bullets %}<li>{{ b.text }}</li>{% endfor %}</ul>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </section>
+
+  {% elif section == "skills" and r.skills %}
+  <section class="skills">
+    <h2>Skills</h2>
+    {% for g in r.skills %}
+    <p><span class="group">{{ g.group }}:</span> {{ g.items | join(", ") }}</p>
+    {% endfor %}
+  </section>
+
+  {% elif section == "education" and r.education %}
+  <section>
+    <h2>Education</h2>
+    {% for e in r.education %}
+    <article class="entry">
+      <div class="row">
+        <h3>{{ e.degree }}{% if e.field %}, {{ e.field }}{% endif %}</h3>
+        {% if e.end %}<span class="dates">{{ e.end | ym }}</span>{% endif %}
+      </div>
+      <div class="row sub"><span class="org">{{ e.institution }}</span></div>
+      {% if e.details %}
+      <ul>{% for d in e.details %}<li>{{ d }}</li>{% endfor %}</ul>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </section>
+
+  {% elif section == "certifications" and r.certifications %}
+  <section class="certs">
+    <h2>Certifications</h2>
+    {% for ce in r.certifications %}
+    <p>{{ ce.name }}{% if ce.issuer %}, {{ ce.issuer }}{% endif %}{% if ce.date %} ({{ ce.date | ym }}){% endif %}</p>
+    {% endfor %}
+  </section>
+  {% endif %}
+{% endfor %}
+
+{% if r.clearance %}
+<section class="certs">
+  <h2>Security Clearance</h2>
+  <p>{{ r.clearance }}</p>
+</section>
+{% endif %}
+</body>
+</html>

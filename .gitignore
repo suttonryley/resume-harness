@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Personal data: your work history, current resume and clearance record.
+# Start from examples/ (see data/README.md). Never commit these.
+data/*
+!data/README.md
+
+# Per-run artifacts (postings, grades, built resumes) and ad-hoc output
+runs/
+out/
+
+# Claude Code local settings and secrets
+.claude/settings.local.json
+.env
+.env.*
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+~$*.docx

@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "target": {"job_sha": "3b1f0c9a6e2d4f8b7a5c1e0d9f8b7a6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1f00", "job_title": "Senior Backend Engineer", "company": "Example Co"},
+  "header": {
+    "name": "Jordan Rivera",
+    "headline": "Senior Backend Engineer",
+    "contact": {
+      "email": "jordan.rivera@example.com",
+      "phone": "(555) 010-4477",
+      "location": "Los Angeles, CA",
+      "links": [
+        {"label": "LinkedIn", "url": "https://www.linkedin.com/in/jordan-rivera-example"},
+        {"label": "GitHub", "url": "https://github.com/jrivera-example"}
+      ]
+    }
+  },
+  "summary": {
+    "text": "Backend engineer with 8 years building payment and logistics systems in Python and Go. Led the migration of a monolith to event-driven services handling 40M events a day, and cut infrastructure spend by 31% through capacity work on Kubernetes.",
+    "source_ids": ["sum_backend"]
+  },
+  "experience": [
+    {
+      "source_role_id": "role_northwind",
+      "company": "Northwind Logistics",
+      "title": "Senior Software Engineer",
+      "location": "Los Angeles, CA",
+      "start": "2022-03",
+      "end": "present",
+      "bullets": [
+        {"text": "Led a team of 5 migrating shipment tracking from a Django monolith to Go services on Kafka, raising throughput to 40M events/day with p99 latency under 120 ms.", "source_ids": ["ach_nw_01"]},
+        {"text": "Cut monthly AWS spend by 31% ($84K/year) by right-sizing EKS node pools and moving batch jobs to spot instances.", "source_ids": ["ach_nw_02"]},
+        {"text": "Designed an idempotent webhook delivery system with retry queues, reducing customer-reported missed notifications from about 200 a week to under 5.", "source_ids": ["ach_nw_03"]},
+        {"text": "Introduced contract testing with Pact across 14 services, catching 22 breaking API changes before release in one quarter.", "source_ids": ["ach_nw_04"]}
+      ]
+    },
+    {
+      "source_role_id": "role_fairpay",
+      "company": "FairPay",
+      "title": "Software Engineer II",
+      "location": "San Francisco, CA",
+      "start": "2019-01",
+      "end": "2022-02",
+      "bullets": [
+        {"text": "Built the ledger reconciliation service in Python and PostgreSQL that matched $2.1B in annual card transactions against bank settlement files.", "source_ids": ["ach_fp_01"]},
+        {"text": "Cut reconciliation runtime from 6 hours to 35 minutes by partitioning tables and parallelizing with Celery.", "source_ids": ["ach_fp_02"]},
+        {"text": "Owned PCI DSS evidence collection for the payments platform across two annual audits with zero findings.", "source_ids": ["ach_fp_03"]}
+      ]
+    },
+    {
+      "source_role_id": "role_cartwheel",
+      "company": "Cartwheel Commerce",
+      "title": "Software Engineer",
+      "location": "Austin, TX",
+      "start": "2017-06",
+      "end": "2018-12",
+      "bullets": [
+        {"text": "Shipped inventory sync between Shopify and three warehouse systems, used by 1,200 merchants.", "source_ids": ["ach_cw_01"]},
+        {"text": "Added structured logging and Datadog dashboards that cut median incident triage time from 50 to 15 minutes.", "source_ids": ["ach_cw_02"]}
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "source_project_id": "proj_pgqueue",
+      "name": "pgqueue",
+      "url": "https://github.com/jrivera-example/pgqueue",
+      "dates": "2023",
+      "bullets": [
+        {"text": "Open-source Postgres-backed job queue for Go using SKIP LOCKED; 900 GitHub stars and used in production by several startups.", "source_ids": ["ach_pgq_01"]}
+      ]
+    }
+  ],
+  "skills": [
+    {"group": "Languages", "items": ["Go", "Python"]},
+    {"group": "Data and messaging", "items": ["PostgreSQL", "Kafka", "Redis", "Celery"]},
+    {"group": "Cloud and infrastructure", "items": ["AWS", "Kubernetes", "Terraform", "Datadog"]},
+    {"group": "Practices", "items": ["Event-driven architecture", "Contract testing", "PCI DSS compliance"]}
+  ],
+  "education": [
+    {"institution": "University of Texas at Austin", "degree": "B.S.", "field": "Computer Science", "end": "2017"}
+  ],
+  "certifications": [
+    {"name": "AWS Certified Solutions Architect – Associate", "issuer": "Amazon Web Services", "date": "2023-05"}
+  ]
+}

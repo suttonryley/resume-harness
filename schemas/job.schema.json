@@ -1,0 +1,521 @@
+{
+  "$defs": {
+    "Company": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "industry": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Industry"
+        },
+        "stage_or_size": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stage Or Size"
+        },
+        "mission_summary": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mission Summary"
+        },
+        "values": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Values",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "Company",
+      "type": "object"
+    },
+    "Compensation": {
+      "additionalProperties": false,
+      "properties": {
+        "min": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Min"
+        },
+        "max": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max"
+        },
+        "currency": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "ISO 4217, e.g. USD",
+          "title": "Currency"
+        },
+        "period": {
+          "anyOf": [
+            {
+              "enum": [
+                "year",
+                "hour"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Period"
+        }
+      },
+      "title": "Compensation",
+      "type": "object"
+    },
+    "JobRole": {
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "description": "As written in the posting",
+          "title": "Title",
+          "type": "string"
+        },
+        "normalized_title": {
+          "description": "Plain title without level or team, e.g. 'software engineer'",
+          "title": "Normalized Title",
+          "type": "string"
+        },
+        "seniority": {
+          "enum": [
+            "intern",
+            "junior",
+            "mid",
+            "senior",
+            "staff",
+            "principal",
+            "manager",
+            "director",
+            "exec"
+          ],
+          "title": "Seniority",
+          "type": "string"
+        },
+        "department": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Department"
+        },
+        "employment_type": {
+          "default": "full_time",
+          "enum": [
+            "full_time",
+            "part_time",
+            "contract",
+            "internship"
+          ],
+          "title": "Employment Type",
+          "type": "string"
+        },
+        "location": {
+          "$ref": "#/$defs/Location"
+        },
+        "compensation": {
+          "$ref": "#/$defs/Compensation"
+        }
+      },
+      "required": [
+        "title",
+        "normalized_title",
+        "seniority",
+        "location"
+      ],
+      "title": "JobRole",
+      "type": "object"
+    },
+    "Keyword": {
+      "additionalProperties": false,
+      "properties": {
+        "term": {
+          "title": "Term",
+          "type": "string"
+        },
+        "count": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Occurrences of the term or any synonym in the posting. Filled by finalize(); the parser leaves it out",
+          "title": "Count"
+        },
+        "synonyms": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Synonyms",
+          "type": "array"
+        }
+      },
+      "required": [
+        "term"
+      ],
+      "title": "Keyword",
+      "type": "object"
+    },
+    "Location": {
+      "additionalProperties": false,
+      "properties": {
+        "cities": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Cities",
+          "type": "array"
+        },
+        "remote": {
+          "default": "unspecified",
+          "description": "'unspecified' when the posting doesn't say; never guess",
+          "enum": [
+            "onsite",
+            "hybrid",
+            "remote",
+            "unspecified"
+          ],
+          "title": "Remote",
+          "type": "string"
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notes"
+        }
+      },
+      "title": "Location",
+      "type": "object"
+    },
+    "Requirement": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "description": "req_01, req_02, ...",
+          "title": "Id",
+          "type": "string"
+        },
+        "text": {
+          "description": "Near-verbatim from the posting",
+          "title": "Text",
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "required",
+            "preferred"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "category": {
+          "enum": [
+            "hard_skill",
+            "tool",
+            "experience",
+            "domain",
+            "education",
+            "certification",
+            "soft_skill",
+            "clearance",
+            "other"
+          ],
+          "title": "Category",
+          "type": "string"
+        },
+        "normalized_terms": {
+          "description": "Lowercase match terms incl. common synonyms, e.g. ['kubernetes', 'k8s']. gaps.py and rank.py match work history against these",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Normalized Terms",
+          "type": "array"
+        },
+        "years_min": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Years Min"
+        },
+        "weight": {
+          "description": "Required outranks preferred; repeated or emphasized requirements outrank single mentions",
+          "exclusiveMinimum": 0,
+          "maximum": 1,
+          "title": "Weight",
+          "type": "number"
+        },
+        "items": {
+          "description": "The separately checkable things a requirement lists (languages, frameworks, both halves of 'web and mobile'). The grader judges each; code combines them by `match`. Empty for a single skill or quality",
+          "items": {
+            "$ref": "#/$defs/RequirementItem"
+          },
+          "title": "Items",
+          "type": "array"
+        },
+        "match": {
+          "anyOf": [
+            {
+              "enum": [
+                "all",
+                "any",
+                "most"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "How items combine. all: every item is needed (score = share shown). any: one is enough ('AWS or GCP', 'such as'). most: a long stack list where a strong candidate shows about half (score = shown / half, capped at 1; needs 4+ items). Required when items is set",
+          "title": "Match"
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "type",
+        "category",
+        "normalized_terms",
+        "weight"
+      ],
+      "title": "Requirement",
+      "type": "object"
+    },
+    "RequirementItem": {
+      "additionalProperties": false,
+      "description": "One listed thing inside a requirement: a language, a framework, a half of 'web and mobile'.",
+      "properties": {
+        "name": {
+          "description": "As written in the posting, e.g. 'Dart', 'mobile', 'NoSQL'",
+          "title": "Name",
+          "type": "string"
+        },
+        "terms": {
+          "description": "Lowercase match terms for this item, incl. spellings and abbreviations. Defaults to the lowercased name",
+          "items": {
+            "type": "string"
+          },
+          "title": "Terms",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "RequirementItem",
+      "type": "object"
+    },
+    "Responsibility": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "description": "resp_01, resp_02, ...",
+          "title": "Id",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "related_requirement_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Related Requirement Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "text"
+      ],
+      "title": "Responsibility",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "properties": {
+        "url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Posting URL; null when the user pasted the text (fetch fallback)",
+          "title": "Url"
+        },
+        "fetched_at": {
+          "description": "When the text was fetched or pasted",
+          "format": "date-time",
+          "title": "Fetched At",
+          "type": "string"
+        },
+        "raw_text_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "sha256 of job_raw.txt; GradeReport.job_sha points here. Filled by finalize(); the parser leaves it out",
+          "title": "Raw Text Sha256"
+        }
+      },
+      "required": [
+        "url",
+        "fetched_at"
+      ],
+      "title": "Source",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Source"
+    },
+    "role": {
+      "$ref": "#/$defs/JobRole"
+    },
+    "company": {
+      "$ref": "#/$defs/Company"
+    },
+    "requirements": {
+      "items": {
+        "$ref": "#/$defs/Requirement"
+      },
+      "minItems": 1,
+      "title": "Requirements",
+      "type": "array"
+    },
+    "responsibilities": {
+      "items": {
+        "$ref": "#/$defs/Responsibility"
+      },
+      "title": "Responsibilities",
+      "type": "array"
+    },
+    "keywords": {
+      "items": {
+        "$ref": "#/$defs/Keyword"
+      },
+      "title": "Keywords",
+      "type": "array"
+    },
+    "requests_clearance": {
+      "description": "True iff some requirement has category 'clearance'. Filled from the requirements when omitted; gates whether the resume may print the clearance line",
+      "title": "Requests Clearance",
+      "type": "boolean"
+    },
+    "parse_notes": {
+      "description": "Ambiguities the parser flagged",
+      "items": {
+        "type": "string"
+      },
+      "title": "Parse Notes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source",
+    "role",
+    "company",
+    "requirements",
+    "requests_clearance"
+  ],
+  "title": "JobContext",
+  "type": "object"
+}

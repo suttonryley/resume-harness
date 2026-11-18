@@ -1,0 +1,831 @@
+{
+  "$defs": {
+    "Achievement": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "summary": {
+          "description": "One canonical sentence; the default bullet wording",
+          "title": "Summary",
+          "type": "string"
+        },
+        "details": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Free-form context: the problem, what you did, how, scale, outcome. Longer than any bullet; the builder mines this for tailored phrasings.",
+          "title": "Details"
+        },
+        "metrics": {
+          "items": {
+            "$ref": "#/$defs/Metric"
+          },
+          "title": "Metrics",
+          "type": "array"
+        },
+        "skills": {
+          "description": "sk_ ids used or demonstrated",
+          "items": {
+            "type": "string"
+          },
+          "title": "Skills",
+          "type": "array"
+        },
+        "tags": {
+          "description": "Themes: leadership, migration, payments...",
+          "items": {
+            "type": "string"
+          },
+          "title": "Tags",
+          "type": "array"
+        },
+        "strength": {
+          "anyOf": [
+            {
+              "maximum": 5,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Optional manual override. By default the builder ranks achievements by relevance to the target job, not by this rating",
+          "title": "Strength"
+        },
+        "private_terms": {
+          "description": "Words or phrases from details that must never appear in a resume; grounding checks scan output for them",
+          "items": {
+            "type": "string"
+          },
+          "title": "Private Terms",
+          "type": "array"
+        },
+        "no_metrics": {
+          "default": false,
+          "description": "True when the impact genuinely can't be measured; the audit stops asking for numbers",
+          "title": "No Metrics",
+          "type": "boolean"
+        },
+        "status": {
+          "default": "complete",
+          "description": "Builder must not describe in_progress or proposed work as finished",
+          "enum": [
+            "complete",
+            "in_progress",
+            "proposed"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "summary"
+      ],
+      "title": "Achievement",
+      "type": "object"
+    },
+    "Certification": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "issuer": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer"
+        },
+        "date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Date"
+        },
+        "expires": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expires"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "Certification",
+      "type": "object"
+    },
+    "Clearance": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "level": {
+          "description": "Internal record, e.g. 'TS/SCI'",
+          "title": "Level",
+          "type": "string"
+        },
+        "polygraph": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "e.g. 'polygraph', 'CI polygraph', 'full-scope polygraph'",
+          "title": "Polygraph"
+        },
+        "status": {
+          "enum": [
+            "active",
+            "current",
+            "inactive",
+            "expired"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "held_through": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "YYYY-MM the clearance was last active",
+          "title": "Held Through"
+        },
+        "public_wording": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Exact text approved for a resume. The builder may only print this string, and only when include_policy allows. None means it can never be printed.",
+          "title": "Public Wording"
+        },
+        "include_policy": {
+          "default": "only_if_job_requests",
+          "enum": [
+            "only_if_job_requests",
+            "always",
+            "never"
+          ],
+          "title": "Include Policy",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "level",
+        "status"
+      ],
+      "title": "Clearance",
+      "type": "object"
+    },
+    "Constraints": {
+      "properties": {
+        "never_claim": {
+          "description": "Skills, titles or phrases never to put on a resume",
+          "items": {
+            "type": "string"
+          },
+          "title": "Never Claim",
+          "type": "array"
+        },
+        "always_include": {
+          "description": "Ids that must appear",
+          "items": {
+            "type": "string"
+          },
+          "title": "Always Include",
+          "type": "array"
+        },
+        "max_pages": {
+          "default": 2,
+          "title": "Max Pages",
+          "type": "integer"
+        },
+        "preferred_section_order": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Preferred Section Order",
+          "type": "array"
+        }
+      },
+      "title": "Constraints",
+      "type": "object"
+    },
+    "Contact": {
+      "properties": {
+        "email": {
+          "title": "Email",
+          "type": "string"
+        },
+        "phone": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Phone"
+        },
+        "location": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Location"
+        },
+        "links": {
+          "items": {
+            "$ref": "#/$defs/Link"
+          },
+          "title": "Links",
+          "type": "array"
+        }
+      },
+      "required": [
+        "email"
+      ],
+      "title": "Contact",
+      "type": "object"
+    },
+    "Education": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "institution": {
+          "title": "Institution",
+          "type": "string"
+        },
+        "degree": {
+          "title": "Degree",
+          "type": "string"
+        },
+        "field": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Field"
+        },
+        "start": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start"
+        },
+        "end": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "End"
+        },
+        "details": {
+          "description": "Honors, GPA, coursework",
+          "items": {
+            "type": "string"
+          },
+          "title": "Details",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "institution",
+        "degree"
+      ],
+      "title": "Education",
+      "type": "object"
+    },
+    "Link": {
+      "properties": {
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "url"
+      ],
+      "title": "Link",
+      "type": "object"
+    },
+    "Metric": {
+      "properties": {
+        "value": {
+          "description": "As it would be written: '15M+', '3,000+', '31%'",
+          "title": "Value",
+          "type": "string"
+        },
+        "description": {
+          "description": "What the number measures",
+          "title": "Description",
+          "type": "string"
+        },
+        "approximate": {
+          "default": false,
+          "description": "True if estimated rather than measured",
+          "title": "Approximate",
+          "type": "boolean"
+        },
+        "shareable": {
+          "default": true,
+          "description": "False if confidential; builder must not print it",
+          "title": "Shareable",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "value",
+        "description"
+      ],
+      "title": "Metric",
+      "type": "object"
+    },
+    "Profile": {
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "headlines": {
+          "description": "Title lines under the name",
+          "items": {
+            "type": "string"
+          },
+          "title": "Headlines",
+          "type": "array"
+        },
+        "contact": {
+          "$ref": "#/$defs/Contact"
+        },
+        "summaries": {
+          "items": {
+            "$ref": "#/$defs/SummaryVariant"
+          },
+          "title": "Summaries",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "contact"
+      ],
+      "title": "Profile",
+      "type": "object"
+    },
+    "Project": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "kind": {
+          "default": "other",
+          "enum": [
+            "open_source",
+            "personal",
+            "academic",
+            "hackathon",
+            "other"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        },
+        "start": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start"
+        },
+        "end": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "End"
+        },
+        "context": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Context"
+        },
+        "achievements": {
+          "items": {
+            "$ref": "#/$defs/Achievement"
+          },
+          "title": "Achievements",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "Project",
+      "type": "object"
+    },
+    "Role": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "company": {
+          "title": "Company",
+          "type": "string"
+        },
+        "company_aliases": {
+          "description": "e.g. 'Northwind' for 'Northwind Logistics'",
+          "items": {
+            "type": "string"
+          },
+          "title": "Company Aliases",
+          "type": "array"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "alt_titles": {
+          "description": "Truthful alternates only",
+          "items": {
+            "type": "string"
+          },
+          "title": "Alt Titles",
+          "type": "array"
+        },
+        "employment_type": {
+          "default": "full_time",
+          "enum": [
+            "full_time",
+            "part_time",
+            "contract",
+            "internship"
+          ],
+          "title": "Employment Type",
+          "type": "string"
+        },
+        "location": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Location"
+        },
+        "start": {
+          "title": "Start",
+          "type": "string"
+        },
+        "end": {
+          "title": "End",
+          "type": "string"
+        },
+        "context": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Team, product, scale. For the builder, not printed",
+          "title": "Context"
+        },
+        "achievements": {
+          "items": {
+            "$ref": "#/$defs/Achievement"
+          },
+          "title": "Achievements",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "company",
+        "title",
+        "start",
+        "end"
+      ],
+      "title": "Role",
+      "type": "object"
+    },
+    "Skill": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "aliases": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Aliases",
+          "type": "array"
+        },
+        "category": {
+          "enum": [
+            "language",
+            "framework",
+            "library",
+            "database",
+            "cloud",
+            "tool",
+            "platform",
+            "practice",
+            "domain",
+            "soft"
+          ],
+          "title": "Category",
+          "type": "string"
+        },
+        "proficiency": {
+          "anyOf": [
+            {
+              "enum": [
+                "familiar",
+                "working",
+                "strong",
+                "expert"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Proficiency"
+        },
+        "years": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Years"
+        },
+        "last_used": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "YYYY or 'present'",
+          "title": "Last Used"
+        },
+        "years_basis": {
+          "anyOf": [
+            {
+              "enum": [
+                "derived",
+                "self_reported"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "derived = total time in the roles/projects that evidence this skill (an upper bound on hands-on time); self_reported = entered by hand and never overwritten",
+          "title": "Years Basis"
+        },
+        "evidence_ids": {
+          "description": "Achievement ids that demonstrate this skill",
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "category"
+      ],
+      "title": "Skill",
+      "type": "object"
+    },
+    "SummaryVariant": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "angle": {
+          "description": "e.g. 'backend', 'platform', 'AI tooling'",
+          "title": "Angle",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "angle",
+        "text"
+      ],
+      "title": "SummaryVariant",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "profile": {
+      "$ref": "#/$defs/Profile"
+    },
+    "roles": {
+      "items": {
+        "$ref": "#/$defs/Role"
+      },
+      "title": "Roles",
+      "type": "array"
+    },
+    "projects": {
+      "items": {
+        "$ref": "#/$defs/Project"
+      },
+      "title": "Projects",
+      "type": "array"
+    },
+    "skills": {
+      "items": {
+        "$ref": "#/$defs/Skill"
+      },
+      "title": "Skills",
+      "type": "array"
+    },
+    "education": {
+      "items": {
+        "$ref": "#/$defs/Education"
+      },
+      "title": "Education",
+      "type": "array"
+    },
+    "certifications": {
+      "items": {
+        "$ref": "#/$defs/Certification"
+      },
+      "title": "Certifications",
+      "type": "array"
+    },
+    "clearances": {
+      "items": {
+        "$ref": "#/$defs/Clearance"
+      },
+      "title": "Clearances",
+      "type": "array"
+    },
+    "constraints": {
+      "$ref": "#/$defs/Constraints"
+    }
+  },
+  "required": [
+    "profile"
+  ],
+  "title": "WorkHistory",
+  "type": "object"
+}

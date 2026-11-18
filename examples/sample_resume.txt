@@ -1,0 +1,37 @@
+Jordan Rivera
+Senior Backend Engineer
+Los Angeles, CA | (555) 010-4477 | jordan.rivera@example.com | linkedin.com/in/jordan-rivera-example |
+github.com/jrivera-example
+Summary
+Backend engineer with 8 years building payment and logistics systems in Python and Go. Led the migration of a
+monolith to event-driven services handling 40M events a day, and cut infrastructure spend by 31% through capacity
+work on Kubernetes.
+Experience
+Senior Software Engineer Mar 2022 – Present
+Northwind Logistics Los Angeles, CA
+• Led a team of 5 migrating shipment tracking from a Django monolith to Go services on Kafka, raising throughput to 40M events/day with p99 latency under 120 ms.
+• Cut monthly AWS spend by 31% ($84K/year) by right-sizing EKS node pools and moving batch jobs to spot instances.
+• Designed an idempotent webhook delivery system with retry queues, reducing customer-reported missed notifications from about 200 a week to under 5.
+• Introduced contract testing with Pact across 14 services, catching 22 breaking API changes before release in one quarter.
+Software Engineer II Jan 2019 – Feb 2022
+FairPay San Francisco, CA
+• Built the ledger reconciliation service in Python and PostgreSQL that matched $2.1B in annual card transactions against bank settlement files.
+• Cut reconciliation runtime from 6 hours to 35 minutes by partitioning tables and parallelizing with Celery.
+• Owned PCI DSS evidence collection for the payments platform across two annual audits with zero findings.
+Software Engineer Jun 2017 – Dec 2018
+Cartwheel Commerce Austin, TX
+• Shipped inventory sync between Shopify and three warehouse systems, used by 1,200 merchants.
+• Added structured logging and Datadog dashboards that cut median incident triage time from 50 to 15 minutes.
+Projects
+pgqueue github.com/jrivera-example/pgqueue 2023
+• Open-source Postgres-backed job queue for Go using SKIP LOCKED; 900 GitHub stars and used in production by several startups.
+Skills
+Languages: Go, Python
+Data and messaging: PostgreSQL, Kafka, Redis, Celery
+Cloud and infrastructure: AWS, Kubernetes, Terraform, Datadog
+Practices: Event-driven architecture, Contract testing, PCI DSS compliance
+Education
+B.S., Computer Science 2017
+University of Texas at Austin
+Certifications
+AWS Certified Solutions Architect – Associate, Amazon Web Services (May 2023)
